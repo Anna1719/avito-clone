@@ -1,5 +1,4 @@
 import { Advertisement } from "@/utils/types";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { Alert, Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -22,26 +21,20 @@ interface AdvertisementFormProps {
   errorMessage?: string | null;
 }
 
-export const AdvertisementForm: React.FC<AdvertisementFormProps> = ({
+export const AdvertisementForm = ({
   isEditMode = false,
-  data = {},
+  data = undefined,
   isStepTwo,
   onSubmit,
   onGoBack,
   successMessage,
   errorMessage,
-}) => {
-  const { control, handleSubmit, reset, watch } = useForm<Advertisement>({
-    defaultValues: { type: "Недвижимость" },
+}: AdvertisementFormProps) => {
+  const { control, handleSubmit, watch } = useForm<Advertisement>({
+    defaultValues: data,
   });
 
   const selectedCategory = watch("type");
-
-  React.useEffect(() => {
-    if (isEditMode && data) {
-      reset(data);
-    }
-  }, [data, isEditMode, reset]);
 
   return (
     <Box sx={{ maxWidth: 600, margin: "0 auto", padding: 2 }}>

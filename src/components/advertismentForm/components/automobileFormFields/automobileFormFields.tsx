@@ -1,5 +1,5 @@
-import { Advertisement } from "@/utils/types";
-import { TextField } from "@mui/material";
+import { Advertisement, CAR_BRANDS } from "@/utils/types";
+import { MenuItem, TextField } from "@mui/material";
 import { Control, Controller } from "react-hook-form";
 
 export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ control }) => (
@@ -16,7 +16,14 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
-        />
+          select
+        >
+          {CAR_BRANDS.map((brand) => (
+            <MenuItem key={brand} value={brand}>
+              {brand}
+            </MenuItem>
+          ))}
+        </TextField>
       )}
     />
 
@@ -39,7 +46,11 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
     <Controller
       name="year"
       control={control}
-      rules={{ required: "Год выпуска обязателен" }}
+      rules={{
+        required: "Год выпуска обязателен",
+        min: { value: 1900, message: "Год должен быть не меньше 1900" },
+        max: { value: new Date().getFullYear(), message: "Год не может быть больше текущего" },
+      }}
       render={({ field, fieldState }) => (
         <TextField
           {...field}
@@ -56,13 +67,18 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
     <Controller
       name="mileage"
       control={control}
-      render={({ field }) => (
+      rules={{
+        min: { value: 0, message: "Пробег не может быть отрицательным" },
+      }}
+      render={({ field, fieldState }) => (
         <TextField
           {...field}
           label="Пробег (км)"
           type="number"
           fullWidth
           margin="normal"
+          error={!!fieldState.error}
+          helperText={fieldState.error?.message}
         />
       )}
     />

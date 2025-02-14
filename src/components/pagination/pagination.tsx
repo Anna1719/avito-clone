@@ -1,4 +1,4 @@
-import styles from "./pagination.module.scss";
+import { Box, Button, Typography } from "@mui/material";
 
 interface PaginationProps {
   currentPage: number;
@@ -12,22 +12,39 @@ export const Pagination = ({
   onPageChange,
 }: PaginationProps) => {
   return (
-    <div className={styles.pagination}>
-      <button
+    <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      gap={2}
+      sx={{
+        marginTop: 4,
+        marginBottom: 4,
+      }}
+    >
+      <Button
+        variant="contained"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
+        sx={{
+          textTransform: "none",
+        }}
       >
-        Previous
-      </button>
-      <span>
+        Назад
+      </Button>
+      <Typography variant="body1">
         {currentPage} / {totalPages}
-      </span>
-      <button
+      </Typography>
+      <Button
+        variant="contained"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
+        sx={{
+          textTransform: "none",
+        }}
       >
-        Next
-      </button>
-    </div>
+        Вперед
+      </Button>
+    </Box>
   );
 };

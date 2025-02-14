@@ -1,1 +1,1 @@
-export { ListPage } from './ui/listPage';
+export { ListPage } from './listPage';
