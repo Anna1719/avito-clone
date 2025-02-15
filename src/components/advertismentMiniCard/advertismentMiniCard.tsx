@@ -20,9 +20,12 @@ export const AdvertisementMiniCard = ({
     <Card>
       <CardMedia
         component="img"
-        height="140"
+        height="400"
         image={advertisement.image || "/placeholder.jpg"}
         alt={advertisement.name}
+        onError={(e) => {
+          (e.target as HTMLImageElement).src = "/placeholder.jpg";
+        }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

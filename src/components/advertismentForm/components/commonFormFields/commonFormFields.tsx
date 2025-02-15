@@ -18,6 +18,7 @@ export const CommonFields: React.FC<{
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -36,6 +37,7 @@ export const CommonFields: React.FC<{
           rows={4}
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -52,6 +54,7 @@ export const CommonFields: React.FC<{
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -65,6 +68,7 @@ export const CommonFields: React.FC<{
           label="Ссылка на фото"
           fullWidth
           margin="normal"
+          value={field.value || ""}
         />
       )}
     />
@@ -73,13 +77,16 @@ export const CommonFields: React.FC<{
       name="type"
       control={control}
       rules={{ required: "Категория обязательна" }}
-      render={({ field }) => (
+      render={({ field, fieldState }) => (
         <TextField
           {...field}
           select
           label="Категория объявления"
           fullWidth
           margin="normal"
+          error={!!fieldState.error}
+          helperText={fieldState.error?.message}
+          value={field.value || ""}
         >
           <MenuItem value="Недвижимость">Недвижимость</MenuItem>
           <MenuItem value="Авто">Авто</MenuItem>

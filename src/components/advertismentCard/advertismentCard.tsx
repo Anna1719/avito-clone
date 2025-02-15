@@ -6,9 +6,12 @@ import {
   Box,
   Chip,
   Button,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { Advertisement } from "@/utils/types";
 import { Link } from "react-router-dom";
+import { renderDetails } from "./renderAdDetails";
 
 interface AdvertisementCardProps {
   advertisement: Advertisement;
@@ -19,112 +22,95 @@ export const AdvertisementCard = ({
   advertisement,
   id,
 }: AdvertisementCardProps) => {
-  const renderDetails = () => {
-    switch (advertisement.type) {
-      case "Недвижимость":
-        return (
-          <>
-            <Typography variant="body2" color="text.secondary">
-              Тип недвижимости: {advertisement.propertyType}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Площадь: {advertisement.area} м²
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Комнат: {advertisement.rooms}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Цена: {advertisement.price.toLocaleString("ru-RU")} ₽
-            </Typography>
-          </>
-        );
-      case "Авто":
-        return (
-          <>
-            <Typography variant="body2" color="text.secondary">
-              Марка: {advertisement.brand}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Модель: {advertisement.model}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Год выпуска: {advertisement.year}
-            </Typography>
-            {advertisement.mileage && (
-              <Typography variant="body2" color="text.secondary">
-                Пробег: {advertisement.mileage} км
-              </Typography>
-            )}
-          </>
-        );
-      case "Услуги":
-        return (
-          <>
-            <Typography variant="body2" color="text.secondary">
-              Тип услуги: {advertisement.serviceType}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Опыт: {advertisement.experience} лет
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Стоимость: {advertisement.cost.toLocaleString("ru-RU")} ₽
-            </Typography>
-            {advertisement.workSchedule && (
-              <Typography variant="body2" color="text.secondary">
-                График работы: {advertisement.workSchedule}
-              </Typography>
-            )}
-          </>
-        );
-      default:
-        return null;
-    }
-  };
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   return (
     <Card
-      sx={{ display: "flex", maxWidth: 1200, margin: "0 auto", boxShadow: 3 }}
+      sx={{
+        display: "flex",
+        flexDirection: isMobile ? "column" : "row",
+        width: "100%",
+        margin: "0 auto",
+        boxShadow: 3,
+        borderRadius: 2,
+        overflow: "hidden",
+      }}
     >
-      <Box sx={{ flex: 1, padding: 2 }}>
+      <Box
+        sx={{
+          flex: 1,
+          padding: 2,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <CardContent>
           <Typography
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ fontWeight: "bold" }}
+            sx={{
+              fontWeight: "bold",
+              fontSize: isMobile ? "2rem" : "3rem",
+            }}
           >
             {advertisement.name}
           </Typography>
           <Typography
             variant="body2"
             color="text.secondary"
-            sx={{ marginBottom: 2 }}
+            sx={{
+              marginBottom: 2,
+              fontSize: isMobile ? "1.5rem" : "2rem",
+            }}
           >
             {advertisement.description}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              fontSize: isMobile ? "1.5rem" : "2rem",
+            }}
+          >
             Локация: {advertisement.location}
           </Typography>
           <Box sx={{ marginTop: 2 }}>
-            <Chip label={advertisement.type} color="primary" />
+            <Chip
+              label={advertisement.type}
+              color="primary"
+              sx={{
+                fontSize: isMobile ? "1.25rem" : "1.75rem",
+                padding: isMobile ? "0.25rem" : "0.8rem",
+              }}
+            />
           </Box>
-          <Box sx={{ marginTop: 2 }}>{renderDetails()}</Box>
+          <Box sx={{ marginTop: 2 }}>
+            {renderDetails({ advertisement, isMobile })}
+          </Box>
           <Box sx={{ marginTop: 2 }}>
             <Button
               component={Link}
               to={`/form/${id}`}
               variant="contained"
               color="primary"
+              fullWidth={isMobile}
+              sx={{
+                fontSize: isMobile ? "1rem" : "1.5rem",
+                padding: isMobile ? "0.25rem" : "0.8rem",
+              }}
             >
               Редактировать
             </Button>
           </Box>
         </CardContent>
       </Box>
-
       <Box
         sx={{
-          width: 300,
+          width: isMobile ? "100%" : "50%",
+          height: isMobile ? "50%" : "auto",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -132,9 +118,16 @@ export const AdvertisementCard = ({
       >
         <CardMedia
           component="img"
-          sx={{ width: "100%", height: "100%", objectFit: "cover" }}
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
           image={advertisement.image || "/placeholder.jpg"}
           alt={advertisement.name}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = "/placeholder.jpg";
+          }}
         />
       </Box>
     </Card>

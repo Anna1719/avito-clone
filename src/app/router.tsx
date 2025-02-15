@@ -1,9 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { MainLayout } from "@/layouts/mainLayout";
 import { ROUTES } from "./routes";
-import { ListPage } from "@/pages/listPage";
-import { FormPage } from "@/pages/formPage";
-import { ItemPage } from "@/pages/itemPage";
+import { ErrorPage, FormPage, ItemPage, SearchPage } from "@/pages";
 
 export const routes = [
   {
@@ -16,7 +14,7 @@ export const routes = [
       },
       {
         path: ROUTES.LIST,
-        element: <ListPage />,
+        element: <SearchPage />,
       },
       {
         path: ROUTES.FORM,
@@ -32,7 +30,7 @@ export const routes = [
       },
       {
         path: "*",
-        element: <div>404 Not Found</div>,
+        element: <ErrorPage />,
       },
     ],
   },

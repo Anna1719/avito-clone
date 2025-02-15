@@ -16,6 +16,7 @@ export const RealEstateFields: React.FC<{ control: Control<Advertisement> }> = (
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
           select
         >
           {PROPERTY_TYPES.map((type) => (
@@ -43,6 +44,7 @@ export const RealEstateFields: React.FC<{ control: Control<Advertisement> }> = (
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -63,6 +65,7 @@ export const RealEstateFields: React.FC<{ control: Control<Advertisement> }> = (
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -83,6 +86,7 @@ export const RealEstateFields: React.FC<{ control: Control<Advertisement> }> = (
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />

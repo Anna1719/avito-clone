@@ -23,7 +23,7 @@ interface AdvertisementFormProps {
 
 export const AdvertisementForm = ({
   isEditMode = false,
-  data = undefined,
+  data,
   isStepTwo,
   onSubmit,
   onGoBack,
@@ -47,13 +47,13 @@ export const AdvertisementForm = ({
         {isEditMode ? "Редактировать Объявление" : "Создать Объявление"}
       </Typography>
 
-      {successMessage && (
+      {isStepTwo && successMessage && (
         <Alert severity="success" sx={{ marginBottom: 2 }}>
           {successMessage}
         </Alert>
       )}
 
-      {errorMessage && (
+      {isStepTwo && errorMessage && (
         <Alert severity="error" sx={{ marginBottom: 2 }}>
           {errorMessage}
         </Alert>
@@ -88,6 +88,7 @@ export const AdvertisementForm = ({
               color="primary"
               fullWidth
               sx={{ marginTop: 2 }}
+              disabled={!!successMessage}
             >
               {isEditMode ? "Сохранить изменения" : "Создать объявление"}
             </Button>
@@ -97,6 +98,7 @@ export const AdvertisementForm = ({
               fullWidth
               sx={{ marginTop: 2 }}
               onClick={onGoBack}
+              disabled={!!successMessage}
             >
               Назад
             </Button>

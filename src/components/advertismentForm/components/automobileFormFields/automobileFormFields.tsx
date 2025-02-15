@@ -16,6 +16,7 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
           select
         >
           {CAR_BRANDS.map((brand) => (
@@ -39,6 +40,7 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -60,6 +62,7 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -68,6 +71,7 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
       name="mileage"
       control={control}
       rules={{
+        required: "Пробег обязателен", //Исходя из результатов отправки данных, пробег обязателен
         min: { value: 0, message: "Пробег не может быть отрицательным" },
       }}
       render={({ field, fieldState }) => (
@@ -79,6 +83,7 @@ export const AutoFields: React.FC<{ control: Control<Advertisement> }> = ({ cont
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />

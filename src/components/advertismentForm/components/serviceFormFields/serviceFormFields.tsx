@@ -16,6 +16,7 @@ export const ServiceFields: React.FC<{ control: Control<Advertisement> }> = ({ c
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
           select
         >
           {SERVICE_TYPES.map((type) => (
@@ -43,6 +44,7 @@ export const ServiceFields: React.FC<{ control: Control<Advertisement> }> = ({ c
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -63,6 +65,7 @@ export const ServiceFields: React.FC<{ control: Control<Advertisement> }> = ({ c
           margin="normal"
           error={!!fieldState.error}
           helperText={fieldState.error?.message}
+          value={field.value || ""}
         />
       )}
     />
@@ -76,6 +79,7 @@ export const ServiceFields: React.FC<{ control: Control<Advertisement> }> = ({ c
           label="График работы"
           fullWidth
           margin="normal"
+          value={field.value || ""}
         />
       )}
     />

@@ -21,7 +21,7 @@ import { ROUTES } from "@/app/routes";
 
 const ITEMS_PER_PAGE = 5;
 
-export const ListPage = () => {
+export const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const urlQuery = searchParams.get("query") || "";
   const urlPage = searchParams.get("page") || "1";

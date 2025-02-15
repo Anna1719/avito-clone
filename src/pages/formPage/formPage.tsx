@@ -5,13 +5,17 @@ import { useMutation } from "@tanstack/react-query";
 import api from "@/hooks/axiosInstance";
 import { Advertisement } from "@/utils/types";
 import { useState } from "react";
+import { AxiosError } from "axios";
 
 export const FormPage = () => {
   const { id } = useParams<string>();
   const isEditMode = !!id;
   const navigate = useNavigate();
 
-  const { data, isError } = useFetchAdvertisementById(id!, isEditMode);
+  const { data, isError, error } = useFetchAdvertisementById(id!, isEditMode);
+
+    const is404Error =
+      error instanceof AxiosError && error?.response?.status === 404;
 
   const [isStepTwo, setIsStepTwo] = useState(false);
 
@@ -51,6 +55,10 @@ export const FormPage = () => {
     setIsStepTwo(false);
   };
 
+  const handleGoNotFound = () => {
+    navigate("/*");
+  };
+
   const renderSuccessMessage = () => {
     if (createMutation.isSuccess) {
       return "Объявление успешно создано! Вы будете перенаправлены на страницу объявления через несколько секунд...";
@@ -65,11 +73,15 @@ export const FormPage = () => {
     if (createMutation.isError || updateMutation.isError) {
       return "Ошибка при отправке формы!";
     }
-    if (isError) {
+    if (!is404Error && isError) {
       return "Ошибка загрузки объявления!";
     }
     return null;
   };
+
+  if(is404Error) {
+    return handleGoNotFound();
+  }
 
   return (
     <AdvertisementForm
