@@ -1,0 +1,1 @@
+export { AdvertisementMiniCard } from './advertismentMiniCard';
