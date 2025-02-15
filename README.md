@@ -77,11 +77,7 @@
 Для запуска проекта выполните следующие шаги:
 
 1. Запустите бекэнд:
-   Скачайте папку [server](https://github.com/avito-tech/tech-internship/tree/main/Tech%20Internships/Frontend/Frontend-trainee-assignment-winter-2025/server) и запустите бек локально с помощью команд:
-   ```
-   $ npm install
-   $ npm start
-   ```
+   Скачайте папку [server](https://github.com/avito-tech/tech-internship/tree/main/Tech%20Internships/Frontend/Frontend-trainee-assignment-winter-2025/server)
    Далее вставьте в файл app.js следующий код (это необходимо для работы CORS)
 
    ```
@@ -91,6 +87,13 @@
    };
    app.use(cors(corsOptions));
    ```
+   
+   И запустите бекэнд локально с помощью команд:
+   ```
+   $ npm install
+   $ npm start
+   ```
+  
 
 2. Клонируйте репозиторий:
 
