@@ -78,17 +78,19 @@
 
 1. Запустите бекэнд:
    Скачайте папку [server](https://github.com/avito-tech/tech-internship/tree/main/Tech%20Internships/Frontend/Frontend-trainee-assignment-winter-2025/server) и запустите бек локально с помощью команд:
+   ```
    $ npm install
    $ npm start
+   ```
    Далее вставьте в файл app.js следующий код (это необходимо для работы CORS)
 
-```
-const cors = require("cors");
-let corsOptions = {
-origin: ["http://localhost:5173"],
-};
-app.use(cors(corsOptions));
-```
+   ```
+   const cors = require("cors");
+   let corsOptions = {
+   origin: ["http://localhost:5173"],
+   };
+   app.use(cors(corsOptions));
+   ```
 
 2. Клонируйте репозиторий:
 
